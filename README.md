@@ -30,12 +30,12 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
-`git clone https://github.com/springframework-meta/gs-reactor.git`
- - cd into `gs-reactor/initial`.
+`git clone https://github.com/springframework-meta/gs-async-reactor.git`
+ - cd into `gs-async-reactor/initial`.
  - Jump ahead to [Create a representation for a joke](#initial).
 
-**When you're finished**, you can check your results against the code in `gs-reactor/complete`.
-[zip]: https://github.com/springframework-meta/gs-reactor/archive/master.zip
+**When you're finished**, you can check your results against the code in `gs-async-reactor/complete`.
+[zip]: https://github.com/springframework-meta/gs-async-reactor/archive/master.zip
 
 
 <a name="scratch"></a>
@@ -63,7 +63,7 @@ In a project directory of your choosing, create the following subdirectory struc
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.springframework</groupId>
-	<artifactId>gs-reactor</artifactId>
+	<artifactId>gs-async-reactor</artifactId>
 	<version>0.1.0</version>
 
 	<dependencies>
@@ -100,35 +100,8 @@ In a project directory of your choosing, create the following subdirectory struc
 	</dependencies>
 
 	<properties>
-		<start-class>hello.Application</start-class>
 		<reactorVersion>1.0.0.M1</reactorVersion>
 	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>hello.Application</mainClass>
-								</transformer>
-							</transformers>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 
 	<!-- TODO: remove once bootstrap goes GA -->
 	<repositories>
@@ -452,7 +425,7 @@ Run the application
 Run your application with `java -jar` at the command line:
 
 ```sh
-$ java -jar target/gs-reactor-0.1.0.jar
+$ java -jar target/gs-async-reactor-0.1.0.jar
 ```
 
 

@@ -1,4 +1,4 @@
-<#assign project_id="gs-reactor">
+<#assign project_id="gs-async-reactor">
 
 # Getting Started: Asynchronous, event-driven programming with Reactor
 
@@ -29,7 +29,7 @@ Set up the project
 
 ### Create a Maven POM
 
-    <@snippet path="pom.xml" prefix="complete"/>
+    <@snippet path="pom.xml" prefix="initial"/>
 
 
 <a name="initial"></a>
