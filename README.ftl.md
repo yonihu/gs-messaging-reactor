@@ -96,7 +96,7 @@ The final step in putting together your application is to register the component
     
 The Reactor environment is defined with the `environment()` method. Then it gets fed into the `reactor()` method to wire up an asynchronous reactor. In this case, you are using the `THREAD_POOL` dispatcher.
 
-> **Note:** Reactor has four dispatchers: synchronous, ring buffer, thread pool, and event loop. Synchronous is typically used inside a consumer, especially if you use `Stream`s and `Promise`s. Ring buffer is used for large volumes of non-blocking events and is based on the [LMAX disruptor](http://martinfowler.com/articles/lmax.html). Thread pool is ideal for longer running tasks that might be IO bound, and when it doesn't matter what thread they are run on. Event loop is when you need all events on the exact same thread.
+> **Note:** Reactor has four dispatchers: **synchronous**, **ring buffer**, **thread pool**, and **event loop**. Synchronous is typically used inside a consumer, especially if you use `Stream`s and `Promise`s. Ring buffer is used for large volumes of non-blocking events and is based on the [LMAX disruptor](http://martinfowler.com/articles/lmax.html). Thread pool is ideal for longer running tasks that might be IO bound, and when it doesn't matter what thread they are run on. Event loop is when you need all events on the exact same thread.
 
 It also defines the number of events to send in the `numberOfJokes()`method and creates a `CountDownLatch` with the `latch()` method. 
 
@@ -133,7 +133,7 @@ The events were dispatched in order, one through ten. But the output shows that 
 
 Summary
 -------
-Congrats! You've just developed an asynchronous, event-driven system using the Reactor project.
+Congrats! You've just developed an asynchronous, event-driven system using the Reactor project. This is just the beginning of what you can build with it.
 
 [u-json]: /u/json
 [u-application-context]: /u/application-context
