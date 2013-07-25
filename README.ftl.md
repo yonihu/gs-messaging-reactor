@@ -31,6 +31,8 @@ Set up the project
 
     <@snippet path="pom.xml" prefix="initial"/>
 
+<@bootstrap_starter_pom_disclaimer/>
+
 
 <a name="initial"></a>
 Create a representation for a joke
