@@ -14,7 +14,6 @@ What you'll need
 
  - About 15 minutes
  - <@prereq_editor_jdk_buildtools/>
- - Redis server (installation instructions below)
 
 
 ## <@how_to_complete_this_guide jump_ahead='Create a representation for a joke'/>
@@ -59,7 +58,7 @@ The wrapper class looks like this:
 
     <@snippet path="src/main/java/hello/JokeResource.java" prefix="complete"/>
     
-It has the `type` attribute along with a `Joke`. This will make it easy to later on use Spring's `RestTemplate` and convert a JSON
+It has the `type` attribute along with a `Joke`. This will make it easy to later on use Spring's `RestTemplate` and convert JSON to a POJO using the Jackson binding library.
 
 Create a receiver
 -----------------
@@ -70,9 +69,9 @@ In any asynchronous application, there are publishers and receivers. To create t
 
 The `Receiver` implements the `Consumer` interface by implementing the `accept()` method. It is geared to receive `Event<Integer>`.
 
-For this example, every time it receives an integer, it fetches another Chuck Norris joke using Spring's `RestTemplate`. Then it signals it's completion to the `CountDownLatch` to coordinate when all events have been processed.
+For this example, every time it receives an integer, it fetches another Chuck Norris joke using Spring's `RestTemplate`. Then it signals its completion to the `CountDownLatch` to coordinate when all events have been processed.
 
-`Receiver` has the `@Service` annotation so it can be automatically registered with the application context.
+`Receiver` has the `@Service` annotation so it can be automatically registered with the [application context][u-application-context].
 
 
 Create a publisher
@@ -135,3 +134,6 @@ The events were dispatched in order, one through ten. But the output shows that 
 Summary
 -------
 Congrats! You've just developed an asynchronous, event-driven system using the Reactor project.
+
+[u-json]: /u/json
+[u-application-context]: /u/application-context

@@ -18,7 +18,6 @@ What you'll need
 
 [jdk]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 [mvn]: http://maven.apache.org/download.cgi
- - Redis server (installation instructions below)
 
 
 How to complete this guide
@@ -215,7 +214,6 @@ The wrapper class looks like this:
 ```java
 package hello;
 
-
 public class JokeResource {
 
 	String type;
@@ -237,7 +235,7 @@ public class JokeResource {
 }
 ```
     
-It has the `type` attribute along with a `Joke`. This will make it easy to later on use Spring's `RestTemplate` and convert a JSON
+It has the `type` attribute along with a `Joke`. This will make it easy to later on use Spring's `RestTemplate` and convert JSON to a POJO using the Jackson binding library.
 
 Create a receiver
 -----------------
@@ -277,9 +275,9 @@ class Receiver implements Consumer<Event<Integer>> {
 
 The `Receiver` implements the `Consumer` interface by implementing the `accept()` method. It is geared to receive `Event<Integer>`.
 
-For this example, every time it receives an integer, it fetches another Chuck Norris joke using Spring's `RestTemplate`. Then it signals it's completion to the `CountDownLatch` to coordinate when all events have been processed.
+For this example, every time it receives an integer, it fetches another Chuck Norris joke using Spring's `RestTemplate`. Then it signals its completion to the `CountDownLatch` to coordinate when all events have been processed.
 
-`Receiver` has the `@Service` annotation so it can be automatically registered with the application context.
+`Receiver` has the `@Service` annotation so it can be automatically registered with the [application context][u-application-context].
 
 
 Create a publisher
@@ -481,3 +479,6 @@ The events were dispatched in order, one through ten. But the output shows that 
 Summary
 -------
 Congrats! You've just developed an asynchronous, event-driven system using the Reactor project.
+
+[u-json]: /u/json
+[u-application-context]: /u/application-context
