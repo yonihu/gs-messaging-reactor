@@ -104,7 +104,7 @@ This class is tagged with the `@Configuration` and `@ComponentScan` annotations.
 
 The `main()` method fetches the `reactor` and the `receiver`. It then registers the `receiver` to digest events on the "jokes" selector. With everything registered, it uses the `Publisher` to send out a series of joke-fetching events.
 
-The `CountDownLatch` then waits until every thread reports that it's done.
+The `CountDownLatch` then waits until every thread reports that it's done before proceeding.
 
 ## <@build_an_executable_jar/>
 
