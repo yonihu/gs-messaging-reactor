@@ -7,36 +7,28 @@
 	<artifactId>gs-async-reactor</artifactId>
 	<version>0.1.0</version>
 
+	<parent>
+		<groupId>org.springframework.zero</groupId>
+		<artifactId>spring-starter-parent</artifactId>
+		<version>0.5.0.BUILD-SNAPSHOT</version>
+	</parent>
+
 	<dependencies>
 		<dependency>
-			<groupId>org.projectreactor</groupId>
-			<artifactId>reactor-core</artifactId>
-			<version>${reactorVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projectreactor</groupId>
-			<artifactId>reactor-groovy</artifactId>
-			<version>${reactorVersion}</version>
+			<groupId>org.springframework.zero</groupId>
+			<artifactId>spring-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectreactor</groupId>
 			<artifactId>reactor-spring</artifactId>
-			<version>${reactorVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>3.2.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.2.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -48,25 +40,8 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>hello.Application</mainClass>
-								</transformer>
-							</transformers>
-						</configuration>
-					</execution>
-				</executions>
+				<groupId>org.springframework.zero</groupId>
+				<artifactId>spring-package-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
