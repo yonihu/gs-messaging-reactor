@@ -34,7 +34,6 @@
 
 	<properties>
 		<start-class>hello.Application</start-class>
-		<reactorVersion>1.0.0.M1</reactorVersion>
 	</properties>
 
 	<build>

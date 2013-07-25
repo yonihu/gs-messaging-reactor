@@ -18,6 +18,15 @@ import reactor.core.Reactor;
 @EnableAutoConfiguration
 @ComponentScan
 public class Application implements CommandLineRunner {
+
+	//TODO: Use reactor-spring to somehow inject THREAD_POOL configuration
+	//	@Bean
+	//	Reactor reactor(Environment env) {
+	//		return Reactors.reactor()
+	//				.env(env)
+	//				.dispatcher(Environment.THREAD_POOL)
+	//				.get();
+	//	}
 	
 	@Autowired
 	private Reactor reactor;

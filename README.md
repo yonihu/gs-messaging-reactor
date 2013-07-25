@@ -66,42 +66,30 @@ In a project directory of your choosing, create the following subdirectory struc
 	<artifactId>gs-async-reactor</artifactId>
 	<version>0.1.0</version>
 
+	<parent>
+		<groupId>org.springframework.zero</groupId>
+		<artifactId>spring-starter-parent</artifactId>
+		<version>0.5.0.BUILD-SNAPSHOT</version>
+	</parent>
+
 	<dependencies>
 		<dependency>
-			<groupId>org.projectreactor</groupId>
-			<artifactId>reactor-core</artifactId>
-			<version>${reactorVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projectreactor</groupId>
-			<artifactId>reactor-groovy</artifactId>
-			<version>${reactorVersion}</version>
+			<groupId>org.springframework.zero</groupId>
+			<artifactId>spring-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectreactor</groupId>
 			<artifactId>reactor-spring</artifactId>
-			<version>${reactorVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>3.2.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.2.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 		</dependency>
 	</dependencies>
-
-	<properties>
-		<reactorVersion>1.0.0.M1</reactorVersion>
-	</properties>
 
 	<!-- TODO: remove once bootstrap goes GA -->
 	<repositories>
@@ -230,15 +218,14 @@ import reactor.function.Consumer;
 
 @Service
 class Receiver implements Consumer<Event<Integer>> {
-	
+
 	@Autowired
 	CountDownLatch latch;
-	
+
 	RestTemplate restTemplate = new RestTemplate();
 
 	public void accept(Event<Integer> ev) {
-		JokeResource jokeResource = restTemplate.getForObject("http://api.icndb.com/jokes/random", 
-				JokeResource.class);
+		JokeResource jokeResource = restTemplate.getForObject("http://api.icndb.com/jokes/random", JokeResource.class);
 		System.out.println("Joke " + ev.getData() + ": " + jokeResource.getValue().getJoke());
 		latch.countDown();
 	}
@@ -322,31 +309,38 @@ import static reactor.event.selector.Selectors.$;
 
 import java.util.concurrent.CountDownLatch;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.autoconfigure.EnableAutoConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.bootstrap.CommandLineRunner;
+import org.springframework.bootstrap.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import reactor.core.Environment;
 import reactor.core.Reactor;
-import reactor.core.spec.Reactors;
 
 @Configuration
+@EnableAutoConfiguration
 @ComponentScan
-public class Application {
+public class Application implements CommandLineRunner {
+
+	//TODO: Use reactor-spring to somehow inject THREAD_POOL configuration
+	//	@Bean
+	//	Reactor reactor(Environment env) {
+	//		return Reactors.reactor()
+	//				.env(env)
+	//				.dispatcher(Environment.THREAD_POOL)
+	//				.get();
+	//	}
 	
-	@Bean
-	public Environment environment() {
-		return new Environment();
-	}
+	@Autowired
+	private Reactor reactor;
 	
-	@Bean
-	public Reactor reactor(Environment env) {
-		return Reactors.reactor()
-				.env(env)
-				.dispatcher(Environment.THREAD_POOL)
-				.get();
-	}
+	@Autowired
+	private Receiver receiver;
+	
+	@Autowired
+	private Publisher publisher;
 	
 	@Bean
 	Integer numberOfJokes() {
@@ -358,16 +352,14 @@ public class Application {
 		return new CountDownLatch(numberOfJokes);
 	}
 	
-	public static void main(String[] args) throws InterruptedException {
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Application.class);
-		
-		Reactor reactor = ctx.getBean(Reactor.class);
-		Receiver receiver = ctx.getBean(Receiver.class);
+	@Override
+	public void run(String... args) throws Exception {		
 		reactor.on($("jokes"), receiver);
-		
-		ctx.getBean(Publisher.class).publishJokes();
-		
-		ctx.close();
+		publisher.publishJokes();
+	}
+	
+	public static void main(String[] args) throws InterruptedException {
+		SpringApplication.run(Application.class, args);
 	}
 
 }
