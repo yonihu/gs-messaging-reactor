@@ -4,31 +4,29 @@ import static reactor.event.selector.Selectors.$;
 
 import java.util.concurrent.CountDownLatch;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.autoconfigure.EnableAutoConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.bootstrap.CommandLineRunner;
+import org.springframework.bootstrap.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import reactor.core.Environment;
 import reactor.core.Reactor;
-import reactor.core.spec.Reactors;
 
 @Configuration
+@EnableAutoConfiguration
 @ComponentScan
-public class Application {
+public class Application implements CommandLineRunner {
 	
-	@Bean
-	public Environment environment() {
-		return new Environment();
-	}
+	@Autowired
+	private Reactor reactor;
 	
-	@Bean
-	public Reactor reactor(Environment env) {
-		return Reactors.reactor()
-				.env(env)
-				.dispatcher(Environment.THREAD_POOL)
-				.get();
-	}
+	@Autowired
+	private Receiver receiver;
+	
+	@Autowired
+	private Publisher publisher;
 	
 	@Bean
 	Integer numberOfJokes() {
@@ -40,16 +38,14 @@ public class Application {
 		return new CountDownLatch(numberOfJokes);
 	}
 	
-	public static void main(String[] args) throws InterruptedException {
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Application.class);
-		
-		Reactor reactor = ctx.getBean(Reactor.class);
-		Receiver receiver = ctx.getBean(Receiver.class);
+	@Override
+	public void run(String... args) throws Exception {		
 		reactor.on($("jokes"), receiver);
-		
-		ctx.getBean(Publisher.class).publishJokes();
-		
-		ctx.close();
+		publisher.publishJokes();
+	}
+	
+	public static void main(String[] args) throws InterruptedException {
+		SpringApplication.run(Application.class, args);
 	}
 
 }
