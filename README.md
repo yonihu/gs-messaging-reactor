@@ -385,6 +385,9 @@ The `main()` method fetches the `reactor` and the `receiver`. It then registers 
 
 The `CountDownLatch` then waits until every thread reports that it's done before proceeding.
 
+Build an executable JAR
+-----------------------
+
 Now that your `Application` class is ready, you simply instruct the build system to create a single, executable jar containing everything. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
 
 Add the following configuration to your existing Maven POM:

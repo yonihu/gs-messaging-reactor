@@ -106,7 +106,9 @@ The `main()` method fetches the `reactor` and the `receiver`. It then registers 
 
 The `CountDownLatch` then waits until every thread reports that it's done before proceeding.
 
-## <@build_an_executable_jar/>
+<@build_an_executable_jar_mainhead/>
+
+<@build_an_executable_jar/>
 
 
 <@run_the_application/>
