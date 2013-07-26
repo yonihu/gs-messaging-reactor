@@ -1,7 +1,4 @@
 
-# Getting Started: Asynchronous, event-driven programming with Reactor
-
-
 What you'll build
 -----------------
 

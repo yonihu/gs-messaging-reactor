@@ -1,8 +1,5 @@
 <#assign project_id="gs-async-reactor">
 
-# Getting Started: Asynchronous, event-driven programming with Reactor
-
-
 What you'll build
 -----------------
 
