@@ -14,7 +14,7 @@ class Receiver implements Consumer<Event<Integer>> {
 
 	@Autowired
 	CountDownLatch latch;
-
+	
 	RestTemplate restTemplate = new RestTemplate();
 
 	public void accept(Event<Integer> ev) {

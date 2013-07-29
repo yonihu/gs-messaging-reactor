@@ -1,4 +1,4 @@
-<#assign project_id="gs-async-reactor">
+<#assign project_id="gs-messaging-reactor">
 
 What you'll build
 -----------------
@@ -134,7 +134,7 @@ The events were dispatched in order, one through ten. But the output shows that 
 
 Summary
 -------
-Congrats! You've just developed an asynchronous, event-driven system using the Reactor project. This is just the beginning of what you can build with it.
+Congrats! You've just developed an asynchronous, message-driven system using the Reactor project. This is just the beginning of what you can build with it.
 
 [u-json]: /u/json
 [u-application-context]: /u/application-context

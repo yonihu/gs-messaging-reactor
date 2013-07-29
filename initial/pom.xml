@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.springframework</groupId>
-	<artifactId>gs-async-reactor</artifactId>
+	<artifactId>gs-messaging-reactor</artifactId>
 	<version>0.1.0</version>
 
 	<parent>

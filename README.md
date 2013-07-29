@@ -27,12 +27,12 @@ To **start from scratch**, move on to [Set up the project](#scratch).
 To **skip the basics**, do the following:
 
  - [Download][zip] and unzip the source repository for this guide, or clone it using [git](/understanding/git):
-`git clone https://github.com/springframework-meta/gs-async-reactor.git`
- - cd into `gs-async-reactor/initial`.
+`git clone https://github.com/springframework-meta/gs-messaging-reactor.git`
+ - cd into `gs-messaging-reactor/initial`.
  - Jump ahead to [Create a representation for a joke](#initial).
 
-**When you're finished**, you can check your results against the code in `gs-async-reactor/complete`.
-[zip]: https://github.com/springframework-meta/gs-async-reactor/archive/master.zip
+**When you're finished**, you can check your results against the code in `gs-messaging-reactor/complete`.
+[zip]: https://github.com/springframework-meta/gs-messaging-reactor/archive/master.zip
 
 
 <a name="scratch"></a>
@@ -60,7 +60,7 @@ In a project directory of your choosing, create the following subdirectory struc
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.springframework</groupId>
-	<artifactId>gs-async-reactor</artifactId>
+	<artifactId>gs-messaging-reactor</artifactId>
 	<version>0.1.0</version>
 
 	<parent>
@@ -222,7 +222,7 @@ class Receiver implements Consumer<Event<Integer>> {
 
 	@Autowired
 	CountDownLatch latch;
-
+	
 	RestTemplate restTemplate = new RestTemplate();
 
 	public void accept(Event<Integer> ev) {
@@ -318,21 +318,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import reactor.core.Environment;
 import reactor.core.Reactor;
+import reactor.core.spec.Reactors;
 
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
 public class Application implements CommandLineRunner {
 
-	//TODO: Use reactor-spring to somehow inject THREAD_POOL configuration
-	//	@Bean
-	//	Reactor reactor(Environment env) {
-	//		return Reactors.reactor()
-	//				.env(env)
-	//				.dispatcher(Environment.THREAD_POOL)
-	//				.get();
-	//	}
+	@Bean
+	Environment env() {
+		return new Environment();
+	}
+	
+	@Bean
+	Reactor createReactor(Environment env) {
+		return Reactors.reactor()
+				.env(env)
+				.dispatcher(Environment.THREAD_POOL)
+				.get();
+	}
 	
 	@Autowired
 	private Reactor reactor;
@@ -421,7 +427,7 @@ Run the application
 Run your application with `java -jar` at the command line:
 
 ```sh
-$ java -jar target/gs-async-reactor-0.1.0.jar
+$ java -jar target/gs-messaging-reactor-0.1.0.jar
 ```
 
 
@@ -447,7 +453,7 @@ The events were dispatched in order, one through ten. But the output shows that 
 
 Summary
 -------
-Congrats! You've just developed an asynchronous, event-driven system using the Reactor project. This is just the beginning of what you can build with it.
+Congrats! You've just developed an asynchronous, message-driven system using the Reactor project. This is just the beginning of what you can build with it.
 
 [u-json]: /u/json
 [u-application-context]: /u/application-context
