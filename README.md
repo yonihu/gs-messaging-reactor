@@ -1,9 +1,9 @@
+This guide walks you through the process of creating an asynchronous, event-driven system using the Reactor project.
 
 What you'll build
 -----------------
 
-This guide walks you through the process of creating an asynchronous, event-driven system using the Reactor project.
-
+You'll build an application that fires off events to fetch a random Chuck Norris joke, and then asynchronously gathers them together.
 
 What you'll need
 ----------------
@@ -39,7 +39,7 @@ To **skip the basics**, do the following:
 Set up the project
 ------------------
 
-First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven/) or [Building Java Projects with Gradle](/guides/gs/gradle/).
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven) or [Building Java Projects with Gradle](/guides/gs/gradle/).
 
 ### Create the directory structure
 

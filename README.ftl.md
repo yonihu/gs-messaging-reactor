@@ -1,10 +1,10 @@
 <#assign project_id="gs-messaging-reactor">
+This guide walks you through the process of creating an asynchronous, event-driven system using the Reactor project.
 
 What you'll build
 -----------------
 
-This guide walks you through the process of creating an asynchronous, event-driven system using the Reactor project.
-
+You'll build an application that fires off events to fetch a random Chuck Norris joke, and then asynchronously gathers them together.
 
 What you'll need
 ----------------
