@@ -12,15 +12,15 @@ import reactor.function.Consumer;
 @Service
 class Receiver implements Consumer<Event<Integer>> {
 
-	@Autowired
-	CountDownLatch latch;
-	
-	RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    CountDownLatch latch;
+    
+    RestTemplate restTemplate = new RestTemplate();
 
-	public void accept(Event<Integer> ev) {
-		JokeResource jokeResource = restTemplate.getForObject("http://api.icndb.com/jokes/random", JokeResource.class);
-		System.out.println("Joke " + ev.getData() + ": " + jokeResource.getValue().getJoke());
-		latch.countDown();
-	}
+    public void accept(Event<Integer> ev) {
+        JokeResource jokeResource = restTemplate.getForObject("http://api.icndb.com/jokes/random", JokeResource.class);
+        System.out.println("Joke " + ev.getData() + ": " + jokeResource.getValue().getJoke());
+        latch.countDown();
+    }
 
 }

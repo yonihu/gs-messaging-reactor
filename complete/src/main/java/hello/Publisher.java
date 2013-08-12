@@ -11,31 +11,31 @@ import reactor.event.Event;
 
 @Service
 public class Publisher {
-	
-	@Autowired
-	Reactor reactor;
-	
-	@Autowired
-	CountDownLatch latch;
-	
-	@Autowired
-	Integer numberOfJokes;
-	
-	public void publishJokes() throws InterruptedException {
-		long start = System.currentTimeMillis();
-		
-		AtomicInteger counter = new AtomicInteger(1);
-		
-		for (int i=0; i < numberOfJokes; i++) {
-			reactor.notify("jokes", Event.wrap(counter.getAndIncrement()));
-		}
+    
+    @Autowired
+    Reactor reactor;
+    
+    @Autowired
+    CountDownLatch latch;
+    
+    @Autowired
+    Integer numberOfJokes;
+    
+    public void publishJokes() throws InterruptedException {
+        long start = System.currentTimeMillis();
+        
+        AtomicInteger counter = new AtomicInteger(1);
+        
+        for (int i=0; i < numberOfJokes; i++) {
+            reactor.notify("jokes", Event.wrap(counter.getAndIncrement()));
+        }
 
-		latch.await();
-		
-		long elapsed = System.currentTimeMillis()-start;
-		
-		System.out.println("Elapsed time: " + elapsed + "ms");
-		System.out.println("Average time per joke: " + elapsed/numberOfJokes + "ms");
-	}
+        latch.await();
+        
+        long elapsed = System.currentTimeMillis()-start;
+        
+        System.out.println("Elapsed time: " + elapsed + "ms");
+        System.out.println("Average time per joke: " + elapsed/numberOfJokes + "ms");
+    }
 
 }

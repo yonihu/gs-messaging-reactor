@@ -56,37 +56,37 @@ In a project directory of your choosing, create the following subdirectory struc
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.springframework</groupId>
-	<artifactId>gs-messaging-reactor</artifactId>
-	<version>0.1.0</version>
+    <groupId>org.springframework</groupId>
+    <artifactId>gs-messaging-reactor</artifactId>
+    <version>0.1.0</version>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>0.5.0.BUILD-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>0.5.0.BUILD-SNAPSHOT</version>
+    </parent>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.projectreactor</groupId>
-			<artifactId>reactor-spring</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectreactor</groupId>
+            <artifactId>reactor-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -97,31 +97,31 @@ In a project directory of your choosing, create the following subdirectory struc
         </plugins>
     </build>
 
-	<repositories>
-		<repository>
-			<id>spring-snapshots2</id>
-			<url>http://repo.springsource.org/libs-snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-release</id>
-			<url>http://repo.springsource.org/libs-release</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<url>http://repo.springsource.org/libs-snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+    <repositories>
+        <repository>
+            <id>spring-snapshots2</id>
+            <url>http://repo.springsource.org/libs-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-release</id>
+            <url>http://repo.springsource.org/libs-release</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <url>http://repo.springsource.org/libs-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
 ```
 
@@ -157,22 +157,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Joke {
 
-	int id;
-	String joke;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getJoke() {
-		return joke;
-	}
-	public void setJoke(String joke) {
-		this.joke = joke;
-	}
-	
+    int id;
+    String joke;
+    
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getJoke() {
+        return joke;
+    }
+    public void setJoke(String joke) {
+        this.joke = joke;
+    }
+    
 }
 ```
     
@@ -186,21 +186,21 @@ package hello;
 
 public class JokeResource {
 
-	String type;
-	Joke value;
+    String type;
+    Joke value;
 
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public Joke getValue() {
-		return value;
-	}
-	public void setValue(Joke value) {
-		this.value = value;
-	}
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+    public Joke getValue() {
+        return value;
+    }
+    public void setValue(Joke value) {
+        this.value = value;
+    }
 
 }
 ```
@@ -228,16 +228,16 @@ import reactor.function.Consumer;
 @Service
 class Receiver implements Consumer<Event<Integer>> {
 
-	@Autowired
-	CountDownLatch latch;
-	
-	RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    CountDownLatch latch;
+    
+    RestTemplate restTemplate = new RestTemplate();
 
-	public void accept(Event<Integer> ev) {
-		JokeResource jokeResource = restTemplate.getForObject("http://api.icndb.com/jokes/random", JokeResource.class);
-		System.out.println("Joke " + ev.getData() + ": " + jokeResource.getValue().getJoke());
-		latch.countDown();
-	}
+    public void accept(Event<Integer> ev) {
+        JokeResource jokeResource = restTemplate.getForObject("http://api.icndb.com/jokes/random", JokeResource.class);
+        System.out.println("Joke " + ev.getData() + ": " + jokeResource.getValue().getJoke());
+        latch.countDown();
+    }
 
 }
 ```
@@ -269,32 +269,32 @@ import reactor.event.Event;
 
 @Service
 public class Publisher {
-	
-	@Autowired
-	Reactor reactor;
-	
-	@Autowired
-	CountDownLatch latch;
-	
-	@Autowired
-	Integer numberOfJokes;
-	
-	public void publishJokes() throws InterruptedException {
-		long start = System.currentTimeMillis();
-		
-		AtomicInteger counter = new AtomicInteger(1);
-		
-		for (int i=0; i < numberOfJokes; i++) {
-			reactor.notify("jokes", Event.wrap(counter.getAndIncrement()));
-		}
+    
+    @Autowired
+    Reactor reactor;
+    
+    @Autowired
+    CountDownLatch latch;
+    
+    @Autowired
+    Integer numberOfJokes;
+    
+    public void publishJokes() throws InterruptedException {
+        long start = System.currentTimeMillis();
+        
+        AtomicInteger counter = new AtomicInteger(1);
+        
+        for (int i=0; i < numberOfJokes; i++) {
+            reactor.notify("jokes", Event.wrap(counter.getAndIncrement()));
+        }
 
-		latch.await();
-		
-		long elapsed = System.currentTimeMillis()-start;
-		
-		System.out.println("Elapsed time: " + elapsed + "ms");
-		System.out.println("Average time per joke: " + elapsed/numberOfJokes + "ms");
-	}
+        latch.await();
+        
+        long elapsed = System.currentTimeMillis()-start;
+        
+        System.out.println("Elapsed time: " + elapsed + "ms");
+        System.out.println("Average time per joke: " + elapsed/numberOfJokes + "ms");
+    }
 
 }
 ```
@@ -335,47 +335,47 @@ import reactor.core.spec.Reactors;
 @ComponentScan
 public class Application implements CommandLineRunner {
 
-	@Bean
-	Environment env() {
-		return new Environment();
-	}
-	
-	@Bean
-	Reactor createReactor(Environment env) {
-		return Reactors.reactor()
-				.env(env)
-				.dispatcher(Environment.THREAD_POOL)
-				.get();
-	}
-	
-	@Autowired
-	private Reactor reactor;
-	
-	@Autowired
-	private Receiver receiver;
-	
-	@Autowired
-	private Publisher publisher;
-	
-	@Bean
-	Integer numberOfJokes() {
-		return 10;
-	}
-	
-	@Bean
-	public CountDownLatch latch(Integer numberOfJokes) {
-		return new CountDownLatch(numberOfJokes);
-	}
-	
-	@Override
-	public void run(String... args) throws Exception {		
-		reactor.on($("jokes"), receiver);
-		publisher.publishJokes();
-	}
-	
-	public static void main(String[] args) throws InterruptedException {
-		SpringApplication.run(Application.class, args);
-	}
+    @Bean
+    Environment env() {
+        return new Environment();
+    }
+    
+    @Bean
+    Reactor createReactor(Environment env) {
+        return Reactors.reactor()
+                .env(env)
+                .dispatcher(Environment.THREAD_POOL)
+                .get();
+    }
+    
+    @Autowired
+    private Reactor reactor;
+    
+    @Autowired
+    private Receiver receiver;
+    
+    @Autowired
+    private Publisher publisher;
+    
+    @Bean
+    Integer numberOfJokes() {
+        return 10;
+    }
+    
+    @Bean
+    public CountDownLatch latch(Integer numberOfJokes) {
+        return new CountDownLatch(numberOfJokes);
+    }
+    
+    @Override
+    public void run(String... args) throws Exception {        
+        reactor.on($("jokes"), receiver);
+        publisher.publishJokes();
+    }
+    
+    public static void main(String[] args) throws InterruptedException {
+        SpringApplication.run(Application.class, args);
+    }
 
 }
 ```
@@ -425,7 +425,7 @@ Now run the following command to produce a single executable JAR file containing
 $ mvn package
 ```
 
-[spring-boot-maven-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-maven-plugin
+[spring-boot-maven-plugin]: https://github.com/SpringSource/spring-boot/tree/master/spring-boot-tools/spring-boot-maven-plugin
 
 > **Note:** The procedure above will create a runnable JAR. You can also opt to [build a classic WAR file](/guides/gs/convert-jar-to-war/) instead.
 
