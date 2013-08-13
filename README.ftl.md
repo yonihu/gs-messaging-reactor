@@ -136,5 +136,5 @@ Summary
 -------
 Congrats! You've just developed an asynchronous, message-driven system using the Reactor project. This is just the beginning of what you can build with it.
 
-[u-json]: /understanding/JSON
-[u-application-context]: /understanding/application-context
+<@u_json/>
+<@u_application_context/>
