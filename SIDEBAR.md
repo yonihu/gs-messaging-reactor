@@ -1,8 +1,8 @@
-### Related Resources
+## Related Resources
 
-There's more to messaging and data integration than is covered here. You may want to continue your exploration of Spring messaging and integration with the following
+There's more to messaging and data integration than what is covered here. You may want to continue your exploration of Spring messaging and integration with the following resources.
 
-### Getting Started Guides
+### Getting Started guides
 
 * [Messaging with Redis][gs-messaging-redis]
 * [Messaging with RabbitMQ][gs-messaging-rabbitmq]
@@ -24,7 +24,7 @@ There's more to messaging and data integration than is covered here. You may wan
 
 [tut-rest]: /guides/tutorials/rest
 
-### Understanding
+### Concepts and technologies
 
 * [REST][u-rest]
 * [JSON][u-json]
