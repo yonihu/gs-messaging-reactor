@@ -57,18 +57,18 @@ The wrapper class looks like this:
 
     <@snippet path="src/main/java/hello/JokeResource.java" prefix="complete"/>
     
-It has the `type` attribute along with a `Joke`. This will make it easy to later on use Spring's `RestTemplate` and convert JSON to a POJO using the Jackson binding library.
+The wrapper class has the `type` attribute along with a `Joke`. This makes it easy later to use Spring's `RestTemplate` and convert JSON to a POJO with the Jackson binding library.
 
 Create a receiver
 -----------------
 
-In any asynchronous application, there are publishers and receivers. To create the receiver, implement a receiver with a method to respond to events:
+An asynchronous application has publishers and receivers. To create the receiver, implement a receiver with a method to respond to events:
 
     <@snippet path="src/main/java/hello/Receiver.java" prefix="complete"/>
 
 The `Receiver` implements the `Consumer` interface by implementing the `accept()` method. It is geared to receive `Event<Integer>`.
 
-For this example, every time it receives an integer, it fetches another Chuck Norris joke using Spring's `RestTemplate`. Then it signals its completion to the `CountDownLatch` to coordinate when all events have been processed.
+For this example, every time the `Consumer` receives an integer, it fetches another Chuck Norris joke using Spring's `RestTemplate`. Then it signals its completion to the `CountDownLatch` to coordinate when all events have been processed.
 
 `Receiver` has the `@Service` annotation so it can be automatically registered with the [application context][u-application-context].
 
@@ -86,8 +86,8 @@ The code uses a for loop to publish a fixed number of events. Each event contain
 
 > **Note:** The code is a bit contrived in that it manually sends a fixed number of integers. In production, this would be replaced by some triggering input, perhaps using Reactor's `TcpServer` to receive incoming data.
 
-Create an Application
----------------------
+Create an Application class
+---------------------------
 
 The final step in putting together your application is to register the components and then invoke them.
 
@@ -95,11 +95,11 @@ The final step in putting together your application is to register the component
     
 The Reactor environment is defined with the `environment()` method. Then it gets fed into the `reactor()` method to wire up an asynchronous reactor. In this case, you are using the `THREAD_POOL` dispatcher.
 
-> **Note:** Reactor has four dispatchers: **synchronous**, **ring buffer**, **thread pool**, and **event loop**. Synchronous is typically used inside a consumer, especially if you use `Stream`s and `Promise`s. Ring buffer is used for large volumes of non-blocking events and is based on the [LMAX disruptor](http://martinfowler.com/articles/lmax.html). Thread pool is ideal for longer running tasks that might be IO bound, and when it doesn't matter what thread they are run on. Event loop is when you need all events on the exact same thread.
+> **Note:** Reactor has four dispatchers: **synchronous**, **ring buffer**, **thread pool**, and **event loop**. Synchronous is typically used inside a consumer, especially if you use `Stream`s and `Promise`s. Ring buffer is used for large volumes of non-blocking events and is based on the [LMAX disruptor](http://martinfowler.com/articles/lmax.html). Thread pool is ideal for longer running tasks that might be IO bound, and when it doesn't matter what thread they are run on. Use event loop when you need all events on the exact same thread.
 
 It also defines the number of events to send in the `numberOfJokes()`method and creates a `CountDownLatch` with the `latch()` method. 
 
-This class is tagged with the `@Configuration` and `@ComponentScan` annotations. This lets it define the application context while also scanning the `hello` package for the `@Service` objects.
+The `Application` class is tagged with the `@Configuration` and `@ComponentScan` annotations. This lets it define the application context while also scanning the `hello` package for the `@Service` objects.
 
 The `main()` method fetches the `reactor` and the `receiver`. It then registers the `receiver` to digest events on the "jokes" selector. With everything registered, it uses the `Publisher` to send out a series of joke-fetching events.
 
@@ -129,12 +129,12 @@ Joke 10: When Chuck Norris break the build, you can't fix it, because there is n
 Elapsed time: 631ms
 Average time per joke: 63ms
 ```
-The events were dispatched in order, one through ten. But the output shows that they were consumed asynchronously due the results being out of order.
+The events were dispatched in order, one through ten. But the output shows that they were consumed asynchronously due to the results being out of order.
 
 
 Summary
 -------
-Congrats! You've just developed an asynchronous, message-driven system using the Reactor project. This is just the beginning of what you can build with it.
+Congratulations! You've just developed an asynchronous, message-driven system using the Reactor project. This is just the beginning of what you can build with it.
 
 <@u_json/>
 <@u_application_context/>
