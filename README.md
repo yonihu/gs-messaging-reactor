@@ -141,7 +141,8 @@ For this event-driven example, you'll fetch jokes from [The Internet Chuck Norri
 	"type": "success", 
 	"value": { 
 		"id": 2, 
-		"joke": "MacGyver can build an airplane out of gum and paper clips. Chuck Norris can kill him and take it.", 
+		"joke": "MacGyver can build an airplane out of gum and paper clips. 
+		         Chuck Norris can kill him and take it.", 
 		"categories": [] 
 	} 
 }
@@ -245,9 +246,9 @@ class Receiver implements Consumer<Event<Integer>> {
 
 The `Receiver` implements the `Consumer` interface by implementing the `accept()` method. It is geared to receive `Event<Integer>`.
 
-For this example, every time the `Consumer` receives an integer, it fetches another Chuck Norris joke using Spring's `RestTemplate`. Then it signals its completion to the `CountDownLatch` to coordinate when all events have been processed.
+For this example, every time the `Receiver` receives an integer, it fetches another Chuck Norris joke using Spring's `RestTemplate`. Then it signals its completion to the `CountDownLatch` to coordinate when all events have been processed.
 
-`Receiver` has the `@Service` annotation so it can be automatically registered with the [application context][u-application-context].
+`Receiver` has the `@Service` annotation so it will be automatically registered with the [application context][u-application-context].
 
 
 Create a publisher
@@ -300,11 +301,13 @@ public class Publisher {
 }
 ```
     
-The code uses a for loop to publish a fixed number of events. Each event contains a unique number. It uses an `AtomicInteger` to ensure a unique set of integers.
+The code uses a for loop to publish a fixed number of events. An `AtomicInteger` is used to fashion a unique number, which gets turned into a Reactor event with `Event.wrap()`. The event is published to the **jokes** channel using `reactor.notify()`.
 
-`Receiver` has the `@Service` annotation so it can be automatically registered with the application context.
+> **Note:** Reactor events can contain any type of POJO. This guide uses a very simple integer, but a more detailed event can be used if more information needs to be transmitted to the receiver.
 
-> **Note:** The code is a bit contrived in that it manually sends a fixed number of integers. In production, this would be replaced by some triggering input, perhaps using Reactor's `TcpServer` to receive incoming data.
+`Receiver` has the `@Service` annotation so it will be automatically registered with the application context.
+
+> **Note:** The code is a bit contrived in that it manually sends a fixed number of integers. In production, this would be replaced by some triggering input, perhaps using Reactor's `TcpServer` to respond to incoming data.
 
 Create an Application class
 ---------------------------
@@ -381,9 +384,9 @@ public class Application implements CommandLineRunner {
 }
 ```
     
-The Reactor environment is defined with the `environment()` method. Then it gets fed into the `reactor()` method to wire up an asynchronous reactor. In this case, you are using the `THREAD_POOL` dispatcher.
+The Reactor environment is defined with the `environment()` method. The environment gets fed into the `reactor()` method to create an asynchronous reactor. In this case, you are using the `THREAD_POOL` dispatcher.
 
-> **Note:** Reactor has four dispatchers: **synchronous**, **ring buffer**, **thread pool**, and **event loop**. Synchronous is typically used inside a consumer, especially if you use `Stream`s and `Promise`s. Ring buffer is used for large volumes of non-blocking events and is based on the [LMAX disruptor](http://martinfowler.com/articles/lmax.html). Thread pool is ideal for longer running tasks that might be IO bound, and when it doesn't matter what thread they are run on. Use event loop when you need all events on the exact same thread.
+> **Note:** Reactor has four dispatchers to pick from: **synchronous**, **ring buffer**, **thread pool**, and **event loop**. **Synchronous** is typically used inside a consumer, especially if you use `Stream`s and `Promise`s. **Ring buffer** is used for large volumes of non-blocking events and is based on the [LMAX disruptor](http://martinfowler.com/articles/lmax.html). **Thread pool** is ideal for longer running tasks that might be IO bound, and when it doesn't matter what thread they are run on. **Event loop** is used when you need all events on the exact same thread.
 
 It also defines the number of events to send in the `numberOfJokes()`method and creates a `CountDownLatch` with the `latch()` method. 
 
