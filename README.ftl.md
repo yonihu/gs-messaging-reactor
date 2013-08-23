@@ -24,9 +24,8 @@ Set up the project
 
 <@create_directory_structure_hello/>
 
-### Create a Gradle build file
 
-    <@snippet path="build.gradle" prefix="initial"/>
+<@create_both_builds/>
 
 <@bootstrap_starter_pom_disclaimer/>
 
@@ -110,10 +109,10 @@ The `CountDownLatch` then waits until every thread reports that it's done before
 
 <@build_an_executable_jar_mainhead/>
 
-<@build_an_executable_jar_with_gradle/>
+<@build_an_executable_jar_with_both/>
 
 
-<@run_the_application_with_gradle/>
+<@run_the_application_with_both/>
 
 
 You should see output similar to this:
