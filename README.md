@@ -85,7 +85,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter:0.5.0.M2")
     compile("org.projectreactor:reactor-spring:1.0.0.M1")
     compile("com.fasterxml.jackson.core:jackson-databind:2.2.2")
-    compile("org.springframework:spring-web:4.0.0.M2")
+    compile("org.springframework:spring-web:4.0.0.M3")
     testCompile("junit:junit:4.11")
 }
 
