@@ -44,14 +44,14 @@
     <repositories>
         <repository>
             <id>spring-snapshots2</id>
-            <url>http://repo.springsource.org/libs-snapshot</url>
+            <url>http://repo.spring.io/libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>spring-release</id>
-            <url>http://repo.springsource.org/libs-release</url>
+            <url>http://repo.spring.io/libs-release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -60,7 +60,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>spring-snapshots</id>
-            <url>http://repo.springsource.org/libs-snapshot</url>
+            <url>http://repo.spring.io/libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
