@@ -144,9 +144,6 @@ include::https://raw.github.com/spring-guides/getting-started-macros/master/buil
 include::https://raw.github.com/spring-guides/getting-started-macros/master/build_an_executable_jar_with_both.adoc[]
 
 
-include::https://raw.github.com/spring-guides/getting-started-macros/master/run_the_application_with_both.adoc[]
-
-
 You should see output similar to this:
 
 ....
