@@ -38,10 +38,6 @@
 
     <build>
         <plugins>
-            <plugin> 
-                <artifactId>maven-compiler-plugin</artifactId> 
-                <version>2.3.2</version> 
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -51,20 +47,14 @@
 
     <repositories>
         <repository>
-            <id>spring-snapshots2</id>
+            <id>spring-snapshots</id>
             <url>http://repo.spring.io/libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>spring-release</id>
-            <url>http://repo.spring.io/libs-release</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>spring-snapshots</id>
@@ -74,4 +64,5 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
 </project>
