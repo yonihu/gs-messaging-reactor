@@ -1,8 +1,15 @@
-package hello;
+package kafkaReactor;
 
 import static reactor.event.selector.Selectors.$;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+//import kafka.producer.Producer;
+import kafka.producer.ProducerConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -42,21 +49,13 @@ public class Application implements CommandLineRunner {
     
     @Autowired
     private Publisher publisher;
-    
-    @Bean
-    Integer numberOfJokes() {
-        return 10;
-    }
-    
-    @Bean
-    public CountDownLatch latch(Integer numberOfJokes) {
-        return new CountDownLatch(numberOfJokes);
-    }
+
     
     @Override
     public void run(String... args) throws Exception {        
-        reactor.on($("jokes"), receiver);
-        publisher.publishJokes();
+        reactor.on($("messages"), receiver);
+        publisher.sendEvents();
+      
     }
     
     public static void main(String[] args) throws InterruptedException {
